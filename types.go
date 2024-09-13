@@ -113,7 +113,8 @@ type Update struct {
 	// these updates.
 	//
 	// optional
-	ChatJoinRequest *ChatJoinRequest `json:"chat_join_request,omitempty"`
+	ChatJoinRequest *ChatJoinRequest        `json:"chat_join_request,omitempty"`
+	MessageReaction *MessageReactionUpdated `json:"message_reaction,omitempty"`
 }
 
 // SentFrom returns the user who sent an update. Can be nil, if Telegram did not provide information
@@ -3327,4 +3328,20 @@ type PreCheckoutQuery struct {
 	//
 	// optional
 	OrderInfo *OrderInfo `json:"order_info,omitempty"`
+}
+
+type MessageReactionUpdated struct {
+	Chat        Chat           `json:"chat"`
+	MessageID   int64          `json:"message_id"`
+	User        User           `json:"from,omitempty"`
+	ActorChat   Chat           `json:"actor_chat,omitempty"`
+	Date        int            `json:"date"`
+	OldReaction []ReactionType `json:"old_reaction"`
+	NewReaction []ReactionType `json:"new_reaction"`
+}
+
+type ReactionType struct {
+	Type          string `json:"type"`
+	Emoji         string `json:"emoji,omitempty"`
+	CustomEmojiID string `json:"custom_emoji_id,omitempty"`
 }
