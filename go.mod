@@ -1,3 +1,3 @@
-module https://github.com/egorinho800/telegram-bot-api
+module github.com/egorinho800/telegram-bot-api
 
 go 1.16
