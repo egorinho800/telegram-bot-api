@@ -113,8 +113,10 @@ type Update struct {
 	// these updates.
 	//
 	// optional
-	ChatJoinRequest *ChatJoinRequest        `json:"chat_join_request,omitempty"`
-	MessageReaction *MessageReactionUpdated `json:"message_reaction,omitempty"`
+	ChatJoinRequest  *ChatJoinRequest        `json:"chat_join_request,omitempty"`
+	MessageReaction  *MessageReactionUpdated `json:"message_reaction,omitempty"`
+	ChatBoost        *ChatBoostUpdated       `json:"chat_boost,omitempty"`
+	RemovedChatBoost *ChatBoostRemoved       `json:"removed_chat_boost,omitempty"`
 }
 
 // SentFrom returns the user who sent an update. Can be nil, if Telegram did not provide information
@@ -331,6 +333,12 @@ type Chat struct {
 	//
 	// optional
 	Location *ChatLocation `json:"location,omitempty"`
+}
+
+type ChatBoost struct {
+	BoostID        string `json:"boost_id"`
+	AddDate        int    `json:"add_date"`
+	ExpirationDate int    `json:"expiration_date"`
 }
 
 // IsPrivate returns if the Chat is a private conversation.
@@ -3338,6 +3346,17 @@ type MessageReactionUpdated struct {
 	Date        int            `json:"date"`
 	OldReaction []ReactionType `json:"old_reaction"`
 	NewReaction []ReactionType `json:"new_reaction"`
+}
+
+type ChatBoostUpdated struct {
+	Chat       Chat      `json:"chat"`
+	ChatBoosts ChatBoost `json:"boosts"`
+}
+
+type ChatBoostRemoved struct {
+	Chat       Chat   `json:"chat"`
+	BoostID    string `json:"boost_id"`
+	RemoveDate int    `json:"remove_date"`
 }
 
 type ReactionType struct {
