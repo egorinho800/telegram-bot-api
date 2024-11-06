@@ -117,6 +117,7 @@ type Update struct {
 	MessageReaction  *MessageReactionUpdated `json:"message_reaction,omitempty"`
 	ChatBoost        *ChatBoostUpdated       `json:"chat_boost,omitempty"`
 	RemovedChatBoost *ChatBoostRemoved       `json:"removed_chat_boost,omitempty"`
+	ReplyToStory     *Story                  `json:"reply_to_story,omitempty"`
 }
 
 // SentFrom returns the user who sent an update. Can be nil, if Telegram did not provide information
@@ -3363,4 +3364,9 @@ type ReactionType struct {
 	Type          string `json:"type"`
 	Emoji         string `json:"emoji,omitempty"`
 	CustomEmojiID string `json:"custom_emoji_id,omitempty"`
+}
+
+type Story struct {
+	ID   int  `json:"id"`
+	Chat Chat `json:"chat"`
 }
