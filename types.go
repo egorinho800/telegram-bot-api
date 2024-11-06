@@ -118,6 +118,7 @@ type Update struct {
 	ChatBoost        *ChatBoostUpdated       `json:"chat_boost,omitempty"`
 	RemovedChatBoost *ChatBoostRemoved       `json:"removed_chat_boost,omitempty"`
 	ReplyToStory     *Story                  `json:"reply_to_story,omitempty"`
+	Story            *Story                  `json:"story,omitempty"`
 }
 
 // SentFrom returns the user who sent an update. Can be nil, if Telegram did not provide information
