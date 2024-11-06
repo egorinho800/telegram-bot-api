@@ -117,8 +117,6 @@ type Update struct {
 	MessageReaction  *MessageReactionUpdated `json:"message_reaction,omitempty"`
 	ChatBoost        *ChatBoostUpdated       `json:"chat_boost,omitempty"`
 	RemovedChatBoost *ChatBoostRemoved       `json:"removed_chat_boost,omitempty"`
-	ReplyToStory     *Story                  `json:"reply_to_story,omitempty"`
-	Story            *Story                  `json:"story,omitempty"`
 }
 
 // SentFrom returns the user who sent an update. Can be nil, if Telegram did not provide information
@@ -644,7 +642,9 @@ type Message struct {
 	// login_url buttons are represented as ordinary url buttons.
 	//
 	// optional
-	ReplyMarkup *InlineKeyboardMarkup `json:"reply_markup,omitempty"`
+	ReplyMarkup  *InlineKeyboardMarkup `json:"reply_markup,omitempty"`
+	ReplyToStory *Story                `json:"reply_to_story,omitempty"`
+	Story        *Story                `json:"story,omitempty"`
 }
 
 // Time converts the message timestamp into a Time.
