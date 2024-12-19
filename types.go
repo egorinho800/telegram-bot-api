@@ -332,7 +332,8 @@ type Chat struct {
 	// connected. Returned only in getChat.
 	//
 	// optional
-	Location *ChatLocation `json:"location,omitempty"`
+	Location                 *ChatLocation `json:"location,omitempty"`
+	EmojiStatusCustomEmojiID string        `json:"emoji_status_custom_emoji_id,omitempty"`
 }
 
 type ChatBoost struct {
