@@ -719,6 +719,18 @@ func (bot *BotAPI) GetMyDefaultAdministratorRights(config GetMyDefaultAdministra
 	return rights, err
 }
 
+func (bot *BotAPI) CreateInvoiceLink(config CreateInvoiceLinkConfig) (string, error) {
+	resp, err := bot.Request(config)
+	if err != nil {
+		return "", err
+	}
+
+	var invoiceLink string
+	err = json.Unmarshal(resp.Result, &invoiceLink)
+
+	return invoiceLink, err
+}
+
 // EscapeText takes an input text and escape Telegram markup symbols.
 // In this way we can send a text without being afraid of having to escape the characters manually.
 // Note that you don't have to include the formatting style in the input text, or it will be escaped too.

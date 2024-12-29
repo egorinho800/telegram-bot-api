@@ -2362,6 +2362,32 @@ func (config SetChatMenuButtonConfig) params() (Params, error) {
 	return params, err
 }
 
+type CreateInvoiceLinkConfig struct {
+	Title       string
+	Description string
+	Payload     string
+	Currency    string
+	Prices      []LabeledPrice
+}
+
+func (config CreateInvoiceLinkConfig) method() string {
+	return "createInvoiceLink"
+}
+
+func (config CreateInvoiceLinkConfig) params() (Params, error) {
+	params := make(Params)
+
+	params.AddNonEmpty("title", config.Title)
+	params.AddNonEmpty("description", config.Description)
+	params.AddNonEmpty("payload", config.Payload)
+	params.AddNonEmpty("currency", config.Currency)
+	if err := params.AddInterface("prices", config.Prices); err != nil {
+		return params, err
+	}
+
+	return params, nil
+}
+
 type GetChatMenuButtonConfig struct {
 	ChatID          int64
 	ChannelUsername string
