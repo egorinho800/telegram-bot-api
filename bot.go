@@ -706,6 +706,11 @@ func (bot *BotAPI) AnswerWebAppQuery(config AnswerWebAppQueryConfig) (SentWebApp
 	return sentWebAppMessage, err
 }
 
+func (bot *BotAPI) AnswerPreCheckoutQuery(config PreCheckoutConfig) error {
+	_, err := bot.Request(config)
+	return err
+}
+
 // GetMyDefaultAdministratorRights gets the current default administrator rights of the bot.
 func (bot *BotAPI) GetMyDefaultAdministratorRights(config GetMyDefaultAdministratorRightsConfig) (ChatAdministratorRights, error) {
 	var rights ChatAdministratorRights
