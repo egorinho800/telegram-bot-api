@@ -328,6 +328,7 @@ type MessageConfig struct {
 	ParseMode             string
 	Entities              []MessageEntity
 	DisableWebPagePreview bool
+	MessageThreadID       int
 }
 
 func (config MessageConfig) params() (Params, error) {
@@ -336,6 +337,7 @@ func (config MessageConfig) params() (Params, error) {
 		return params, err
 	}
 
+	params.AddNonZero("message_thread_id", config.MessageThreadID)
 	params.AddNonEmpty("text", config.Text)
 	params.AddBool("disable_web_page_preview", config.DisableWebPagePreview)
 	params.AddNonEmpty("parse_mode", config.ParseMode)
