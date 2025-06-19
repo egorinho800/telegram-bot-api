@@ -1244,6 +1244,22 @@ func (config InlineConfig) params() (Params, error) {
 	return params, err
 }
 
+type AnswerCallbackQueryConfig struct {
+	CallbackQueryID string `json:"callback_query_id"`
+}
+
+func (config AnswerCallbackQueryConfig) method() string {
+	return "answerCallbackQuery"
+}
+
+func (config AnswerCallbackQueryConfig) params() (Params, error) {
+	params := make(Params)
+
+	params["callback_query_id"] = config.CallbackQueryID
+
+	return params, nil
+}
+
 // AnswerWebAppQueryConfig is used to set the result of an interaction with a
 // Web App and send a corresponding message on behalf of the user to the chat
 // from which the query originated.

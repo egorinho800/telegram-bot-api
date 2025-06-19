@@ -692,6 +692,18 @@ func (bot *BotAPI) CopyMessage(config CopyMessageConfig) (MessageID, error) {
 	return messageID, err
 }
 
+func (bot *BotAPI) AnswerCallbackQuery(config AnswerCallbackQueryConfig) (SentWebAppMessage, error) {
+	var sentWebAppMessage SentWebAppMessage
+
+	resp, err := bot.Request(config)
+	if err != nil {
+		return sentWebAppMessage, err
+	}
+
+	err = json.Unmarshal(resp.Result, &sentWebAppMessage)
+	return sentWebAppMessage, err
+}
+
 // AnswerWebAppQuery sets the result of an interaction with a Web App and send a
 // corresponding message on behalf of the user to the chat from which the query originated.
 func (bot *BotAPI) AnswerWebAppQuery(config AnswerWebAppQueryConfig) (SentWebAppMessage, error) {
