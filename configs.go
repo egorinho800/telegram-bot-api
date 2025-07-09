@@ -329,6 +329,13 @@ type MessageConfig struct {
 	Entities              []MessageEntity
 	DisableWebPagePreview bool
 	MessageThreadID       int
+	LinkPreviewOptions    struct {
+		IsDisabled       bool   `json:"is_disabled"`
+		URL              string `json:"url"`
+		PreferSmallMedia bool   `json:"prefer_small_media"`
+		PreferLargeMedia bool   `json:"prefer_large_media"`
+		ShowAboveText    bool   `json:"show_above_text"`
+	}
 }
 
 func (config MessageConfig) params() (Params, error) {
@@ -341,6 +348,7 @@ func (config MessageConfig) params() (Params, error) {
 	params.AddNonEmpty("text", config.Text)
 	params.AddBool("disable_web_page_preview", config.DisableWebPagePreview)
 	params.AddNonEmpty("parse_mode", config.ParseMode)
+	err = params.AddInterface("link_preview_options", config.LinkPreviewOptions)
 	err = params.AddInterface("entities", config.Entities)
 
 	return params, err
