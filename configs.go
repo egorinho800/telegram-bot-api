@@ -1006,6 +1006,13 @@ type EditMessageTextConfig struct {
 	ParseMode             string
 	Entities              []MessageEntity
 	DisableWebPagePreview bool
+	LinkPreviewOptions    struct {
+		IsDisabled       bool   `json:"is_disabled"`
+		URL              string `json:"url"`
+		PreferSmallMedia bool   `json:"prefer_small_media"`
+		PreferLargeMedia bool   `json:"prefer_large_media"`
+		ShowAboveText    bool   `json:"show_above_text"`
+	}
 }
 
 func (config EditMessageTextConfig) params() (Params, error) {
@@ -1017,6 +1024,7 @@ func (config EditMessageTextConfig) params() (Params, error) {
 	params["text"] = config.Text
 	params.AddNonEmpty("parse_mode", config.ParseMode)
 	params.AddBool("disable_web_page_preview", config.DisableWebPagePreview)
+	err = params.AddInterface("link_preview_options", config.LinkPreviewOptions)
 	err = params.AddInterface("entities", config.Entities)
 
 	return params, err
