@@ -616,6 +616,7 @@ type AnimationConfig struct {
 	Caption         string
 	ParseMode       string
 	CaptionEntities []MessageEntity
+	MessageThreadID int
 }
 
 func (config AnimationConfig) params() (Params, error) {
@@ -624,6 +625,7 @@ func (config AnimationConfig) params() (Params, error) {
 		return params, err
 	}
 
+	params.AddNonZero("message_thread_id", config.MessageThreadID)
 	params.AddNonZero("duration", config.Duration)
 	params.AddNonEmpty("caption", config.Caption)
 	params.AddNonEmpty("parse_mode", config.ParseMode)
