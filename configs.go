@@ -1027,6 +1027,9 @@ func (config EditMessageTextConfig) params() (Params, error) {
 	params.AddNonEmpty("parse_mode", config.ParseMode)
 	params.AddBool("disable_web_page_preview", config.DisableWebPagePreview)
 	err = params.AddInterface("link_preview_options", config.LinkPreviewOptions)
+	if err != nil {
+		return params, err
+	}
 	err = params.AddInterface("entities", config.Entities)
 
 	return params, err
@@ -1039,9 +1042,16 @@ func (config EditMessageTextConfig) method() string {
 // EditMessageCaptionConfig allows you to modify the caption of a message.
 type EditMessageCaptionConfig struct {
 	BaseEdit
-	Caption         string
-	ParseMode       string
-	CaptionEntities []MessageEntity
+	Caption            string
+	ParseMode          string
+	CaptionEntities    []MessageEntity
+	LinkPreviewOptions struct {
+		IsDisabled       bool   `json:"is_disabled"`
+		URL              string `json:"url"`
+		PreferSmallMedia bool   `json:"prefer_small_media"`
+		PreferLargeMedia bool   `json:"prefer_large_media"`
+		ShowAboveText    bool   `json:"show_above_text"`
+	}
 }
 
 func (config EditMessageCaptionConfig) params() (Params, error) {
@@ -1053,6 +1063,10 @@ func (config EditMessageCaptionConfig) params() (Params, error) {
 	params["caption"] = config.Caption
 	params.AddNonEmpty("parse_mode", config.ParseMode)
 	err = params.AddInterface("caption_entities", config.CaptionEntities)
+	if err != nil {
+		return params, err
+	}
+	err = params.AddInterface("link_preview_options", config.LinkPreviewOptions)
 
 	return params, err
 }
