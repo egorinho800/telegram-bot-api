@@ -2537,6 +2537,16 @@ func prepareInputMediaParam(inputMedia interface{}, idx int) interface{} {
 		}
 
 		return m
+	case InputMediaAnimation:
+		if m.Media.NeedsUpload() {
+			m.Media = fileAttach(fmt.Sprintf("attach://file-%d", idx))
+		}
+
+		if m.Thumb != nil && m.Thumb.NeedsUpload() {
+			m.Thumb = fileAttach(fmt.Sprintf("attach://file-%d-thumb", idx))
+		}
+
+		return m
 	}
 
 	return nil
